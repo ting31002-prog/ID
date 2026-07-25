@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自助下单 - 账号小铺</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f0f2f5; color: #333; padding: 15px; }
+        .card { background: #fff; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        h2 { text-align: center; color: #1890ff; margin-bottom: 15px; font-size: 18px; }
+        .item { border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px; }
+        .item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .title { font-weight: bold; font-size: 15px; margin-bottom: 5px; }
+        .price { color: #ff4d4f; font-weight: bold; margin-bottom: 8px; }
+        input, select { width: 100%; padding: 10px; margin-bottom: 8px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 14px; }
+        button { background: #1890ff; color: #fff; border: none; padding: 10px; width: 100%; border-radius: 6px; font-size: 15px; font-weight: bold; }
+        .tips { font-size: 12px; color: #fa8c16; background: #fffbe6; padding: 8px; border-radius: 4px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>🛍️ 苹果ID、小火箭 & 谷歌邮箱 自助下单</h2>
+    <div class="tips">
+        ⚠️ <b>流程说明：</b>选择商品 -> 填写你的接收联系方式（邮箱/QQ/微信） -> 扫码付款 -> 客服看到后台订单后<b>手动发货</b>至你的联系方式。
+    </div>
+</div>
+
+<!-- 商品 1：小火箭共享ID -->
+<div class="card">
+    <div class="item">
+        <div class="title">🚀 小火箭 (Shadowrocket) 共享ID</div>
+        <div class="price">￥ 5.00</div>
+        <input type="text" id="contact1" placeholder="请填写您的联系方式(如QQ/微信/邮箱)">
+        <button onclick="pay('小火箭Shadowrocket共享ID', '5.00', 'contact1')">去付款 (自动记录订单)</button>
+    </div>
+</div>
+
+<!-- 商品 2：苹果美区ID -->
+<div class="card">
+    <div class="item">
+        <div class="title">🍎 美区已激活苹果 ID (独享)</div>
+        <div class="price">￥ 15.00</div>
+        <input type="text" id="contact2" placeholder="请填写您的联系方式(如QQ/微信/邮箱)">
+        <button onclick="pay('美区苹果ID独享', '15.00', 'contact2')">去付款 (自动记录订单)</button>
+    </div>
+</div>
+
+<!-- 商品 3：谷歌邮箱 -->
+<div class="card">
+    <div class="item">
+        <div class="title">🌐 谷歌邮箱 Gmail 稳定老号</div>
+        <div class="price">￥ 10.00</div>
+        <input type="text" id="contact3" placeholder="请填写您的联系方式(如QQ/微信/邮箱)">
+        <button onclick="pay('谷歌Gmail', '10.00', 'contact3')">去付款 (自动记录订单)</button>
+    </div>
+</div>
+
+<!-- 弹出的收款码区域 -->
+<div class="card" id="payBox" style="display:none; text-align:center;">
+    <h3>请使用 微信 或 支付宝 扫码付款</h3>
+    <p id="payInfo" style="margin: 10px 0; font-weight:bold; color:#ff4d4f;"></p>
+    <img src="你的收款码图片直链.jpg" alt="收款码" style="width:200px; height:200px; border:1px solid #ddd;">
+    <p style="font-size:12px; color:#666; margin-top:10px;">付款时请备注好您的联系方式，或截图发给客服。</p>
+</div>
+
+<script>
+    function pay(productName, price, contactId) {
+        let contact = document.getElementById(contactId).value.trim();
+        if(!contact) {
+            alert("请先填写您的接收联系方式（方便发货给你）！");
+            return;
+        }
+
+        document.getElementById('payBox').style.display = 'block';
+        document.getElementById('payInfo').innerHTML = `购买：${productName} | 应付：￥${price}<br>接收账号：${contact}`;
+        document.getElementById('payBox').scrollIntoView({ behavior: 'smooth' });
+
+        alert("订单已生成！请扫码付款。付款后请主动联系客服（微信/TG），报上您的联系方式拿货。");
+    }
+</script>
+
+</body>
+</html>
